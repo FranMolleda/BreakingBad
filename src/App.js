@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Phrase from "./component/Phrase";
 
@@ -33,7 +33,6 @@ const Button = styled.button`
 function App() {
   const [phrase, setPhrase] = useState({});
 
-  const { quote, author } = phrase;
   const apiAsk = async () => {
     const api = await fetch(
       "https://breaking-bad-quotes.herokuapp.com/v1/quotes"
@@ -41,6 +40,11 @@ function App() {
     const phrase = await api.json();
     setPhrase(phrase[0]);
   };
+
+  //Para que se vea una frase según se abre la App utilizamos el useEffect
+  useEffect(() => {
+    apiAsk();
+  }, []);
   return (
     <Container>
       <Phrase phrase={phrase} />
