@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
@@ -30,8 +30,12 @@ const Button = styled.button`
 `;
 
 function App() {
-  const apiAsk = () => {
-    console.log("api consulted");
+  const apiAsk = async () => {
+    const api = await fetch(
+      "https://breaking-bad-quotes.herokuapp.com/v1/quotes"
+    );
+    const phrase = await api.json();
+    console.log(phrase[0]);
   };
   return (
     <Container>
